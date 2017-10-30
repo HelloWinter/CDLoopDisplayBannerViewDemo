@@ -1,0 +1,6 @@
+framework module Pods_CDLoopDisplayBannerViewDemo {
+  umbrella header "Pods-CDLoopDisplayBannerViewDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}

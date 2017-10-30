@@ -13,9 +13,11 @@
 		62967E661FA3044000483578 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62967E651FA3044000483578 /* Assets.xcassets */; };
 		62967E691FA3044000483578 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62967E671FA3044000483578 /* LaunchScreen.storyboard */; };
 		62BFAF661FA30F7E000CBC26 /* CDLoopDisplayBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BFAF651FA30F7E000CBC26 /* CDLoopDisplayBannerView.swift */; };
+		9BB84C899364B13FB8FFFE2D /* Pods_CDLoopDisplayBannerViewDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88491493967FDD465AF372A4 /* Pods_CDLoopDisplayBannerViewDemo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52E05AE9361A300522B09E3C /* Pods-CDLoopDisplayBannerViewDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDLoopDisplayBannerViewDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CDLoopDisplayBannerViewDemo/Pods-CDLoopDisplayBannerViewDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		62967E5B1FA3044000483578 /* CDLoopDisplayBannerViewDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CDLoopDisplayBannerViewDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		62967E5E1FA3044000483578 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		62967E601FA3044000483578 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		62967E681FA3044000483578 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		62967E6A1FA3044000483578 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		62BFAF651FA30F7E000CBC26 /* CDLoopDisplayBannerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDLoopDisplayBannerView.swift; sourceTree = "<group>"; };
+		88491493967FDD465AF372A4 /* Pods_CDLoopDisplayBannerViewDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CDLoopDisplayBannerViewDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF47E15E8720701C29CB5BE7 /* Pods-CDLoopDisplayBannerViewDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CDLoopDisplayBannerViewDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CDLoopDisplayBannerViewDemo/Pods-CDLoopDisplayBannerViewDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,18 +35,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BB84C899364B13FB8FFFE2D /* Pods_CDLoopDisplayBannerViewDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41157EB0F93C938A336D4F59 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				88491493967FDD465AF372A4 /* Pods_CDLoopDisplayBannerViewDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		62967E521FA3044000483578 = {
 			isa = PBXGroup;
 			children = (
 				62BFAF641FA30F7E000CBC26 /* CDLoopDisplayBannerView */,
 				62967E5D1FA3044000483578 /* CDLoopDisplayBannerViewDemo */,
 				62967E5C1FA3044000483578 /* Products */,
+				9997C726B76B800A40DF9E53 /* Pods */,
+				41157EB0F93C938A336D4F59 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -75,6 +90,15 @@
 			path = CDLoopDisplayBannerView;
 			sourceTree = "<group>";
 		};
+		9997C726B76B800A40DF9E53 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				52E05AE9361A300522B09E3C /* Pods-CDLoopDisplayBannerViewDemo.debug.xcconfig */,
+				CF47E15E8720701C29CB5BE7 /* Pods-CDLoopDisplayBannerViewDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +106,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 62967E6D1FA3044000483578 /* Build configuration list for PBXNativeTarget "CDLoopDisplayBannerViewDemo" */;
 			buildPhases = (
+				EEF8D24D84B2231777E6AA8F /* [CP] Check Pods Manifest.lock */,
 				62967E571FA3044000483578 /* Sources */,
 				62967E581FA3044000483578 /* Frameworks */,
 				62967E591FA3044000483578 /* Resources */,
+				D6AF1FBD72810D52704A4A3B /* [CP] Embed Pods Frameworks */,
+				78BBDDF059F544A1A5D78F9B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -141,6 +168,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		78BBDDF059F544A1A5D78F9B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CDLoopDisplayBannerViewDemo/Pods-CDLoopDisplayBannerViewDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D6AF1FBD72810D52704A4A3B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-CDLoopDisplayBannerViewDemo/Pods-CDLoopDisplayBannerViewDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CDLoopDisplayBannerViewDemo/Pods-CDLoopDisplayBannerViewDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEF8D24D84B2231777E6AA8F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CDLoopDisplayBannerViewDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		62967E571FA3044000483578 /* Sources */ = {
@@ -284,6 +365,7 @@
 		};
 		62967E6E1FA3044000483578 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52E05AE9361A300522B09E3C /* Pods-CDLoopDisplayBannerViewDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +380,7 @@
 		};
 		62967E6F1FA3044000483578 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF47E15E8720701C29CB5BE7 /* Pods-CDLoopDisplayBannerViewDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
