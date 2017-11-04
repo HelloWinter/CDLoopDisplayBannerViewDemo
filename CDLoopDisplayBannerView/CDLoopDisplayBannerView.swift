@@ -14,36 +14,46 @@ private let kMiddleImageTag = 400
 private let kBehindImageTag = 500
 
 class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
+    ///滚动banner的图片链接数组
     var imageLinks : [String] = [String]() {
         didSet{
             if self.imageLinks.count != 0 {
                 self.pageControl.numberOfPages = self.imageLinks.count
                 self.pageControl.currentPage = 0
                 self.scrollView.isScrollEnabled = self.imageLinks.count == 1 ? false : true
-                ///////////////////////////////////
+                self.layoutScrollViewSubviews()
             }
         }
     }
-    var autoScrollTimeInterval : TimeInterval = 4.0
-    var placeHolderImage = "cd_banner_placeholder"
+    ///是否自动滚动
     var autoScroll = false
+    ///自动滚动的时间间隔
+    var autoScrollTimeInterval : TimeInterval = 4.0
+    ///图片点击回调
     var imageClickClousure : ((_ : Int)->Void)?
-    var pageControlHidden = true {
+    ///是否隐藏pageControl
+    var pageControlHidden = false {
         didSet{
             self.pageControl.isHidden = pageControlHidden
         }
     }
+    ///pageControl选中时小点的颜色
     var pageCtrlSelectColor : UIColor?
+    ///pageControl未选中时小点的颜色
     var pageCtrlNormalColor : UIColor?
+    ///当前的imageView
     var currentImageView : UIImageView? {
         get {
             return self.imgViewsCachePool[self.pageControl.currentPage]
         }
     }
+    ///图片距离上下左右的边距
     var imageViewEdgeInsets = UIEdgeInsets.zero
-    
+    ///临时页码
     private var tempPage = 0
+    ///定时器
     private var timer : Timer?
+    ///scrollView
     private lazy var scrollView : UIScrollView = {
         let scrollV = UIScrollView()
         scrollV.isPagingEnabled = true
@@ -52,6 +62,7 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         scrollV.showsVerticalScrollIndicator=false
         return scrollV
     }()
+    ///pageControl
     private lazy var pageControl : UIPageControl = {
         let pageCtrl = UIPageControl()
         pageCtrl.isHidden = self.pageControlHidden
@@ -64,6 +75,7 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
         return pageCtrl
     }()
+    ///imageView缓存池
     private lazy var imgViewsCachePool : [UIImageView] = {
         return [UIImageView]()
     }()
@@ -164,7 +176,7 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
     // MARK: - private
     private func startTimer() -> Void {
         invalidateTimer()
-        timer=Timer(timeInterval: autoScrollTimeInterval, target: self, selector: Selector(("scrollToNextPage")), userInfo: nil, repeats: true)
+        timer=Timer(timeInterval: autoScrollTimeInterval, target: self, selector: #selector(CDLoopDisplayBannerView.scrollToNextPage), userInfo: nil, repeats: true)
         RunLoop.current.add(timer!, forMode: .defaultRunLoopMode)
     }
     
@@ -173,7 +185,7 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         timer=nil
     }
     
-    private func scrollToNextPage() -> Void {
+    @objc private func scrollToNextPage() -> Void {
         var page = pageControl.currentPage
         page += 1
         tempPage = page
@@ -218,7 +230,7 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
                 let url = URL(string: imageLinks[i])
                 scrollImg!.kf.setImage(with:url)
             }
-            let tap = UITapGestureRecognizer(target: self, action: Selector(("imageClick")))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(CDLoopDisplayBannerView.imageClick(_:)))
             scrollImg!.addGestureRecognizer(tap)
             scrollView.addSubview(scrollImg!)
         }
