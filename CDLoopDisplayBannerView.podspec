@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CDLoopDisplayBannerView"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A CDLoopDisplayBannerView."
 
   # This description is used to generate tags and improve search results.
@@ -53,7 +53,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "cd" => "Cheng Dong" }
+  s.author             = { "cd" => "cdengong@gmail.com" }
   # Or just: s.author    = "cd"
   # s.authors            = { "cd" => "" }
   s.social_media_url   = "http://chengdong.online"
@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "CDLoopDisplayBannerView", "CDLoopDisplayBannerView/**/*.{h,m,swift}"
+  s.source_files  = "CDLoopDisplayBannerView", "CDLoopDisplayBannerView/**/*.swift"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
