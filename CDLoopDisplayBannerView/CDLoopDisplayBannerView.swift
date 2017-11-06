@@ -13,9 +13,9 @@ private let kFrontImageTag = 300
 private let kMiddleImageTag = 400
 private let kBehindImageTag = 500
 
-class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
+public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
     ///滚动banner的图片链接数组
-    var imageLinks : [String] = [String]() {
+    public var imageLinks : [String] = [String]() {
         didSet{
             if self.imageLinks.count != 0 {
                 self.pageControl.numberOfPages = self.imageLinks.count
@@ -26,29 +26,29 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
     }
     ///是否自动滚动
-    var autoScroll = false
+    public var autoScroll = false
     ///自动滚动的时间间隔
-    var autoScrollTimeInterval : TimeInterval = 4.0
+    public var autoScrollTimeInterval : TimeInterval = 4.0
     ///图片点击回调
-    var imageClickClousure : ((_ : Int)->Void)?
+    public var imageClickClousure : ((_ : Int)->Void)?
     ///是否隐藏pageControl
-    var pageControlHidden = false {
+    public var pageControlHidden = false {
         didSet{
             self.pageControl.isHidden = pageControlHidden
         }
     }
     ///pageControl选中时小点的颜色
-    var pageCtrlSelectColor : UIColor?
+    public var pageCtrlSelectColor : UIColor?
     ///pageControl未选中时小点的颜色
-    var pageCtrlNormalColor : UIColor?
+    public var pageCtrlNormalColor : UIColor?
     ///当前的imageView
-    var currentImageView : UIImageView? {
+    public var currentImageView : UIImageView? {
         get {
             return self.imgViewsCachePool[self.pageControl.currentPage]
         }
     }
     ///图片距离上下左右的边距
-    var imageViewEdgeInsets = UIEdgeInsets.zero
+    public var imageViewEdgeInsets = UIEdgeInsets.zero
     ///临时页码
     private var tempPage = 0
     ///定时器
@@ -84,17 +84,17 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         invalidateTimer()
     }
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(self.scrollView)
         self.addSubview(self.pageControl)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         let imageViewTopMagin = self.imageViewEdgeInsets.top
         let imageViewLeftMagin = self.imageViewEdgeInsets.left
@@ -108,18 +108,16 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         
         let currentimgWidth = self.scrollView.frame.size.width - imageViewLeftMagin - imageViewRightMagin
         let currentimgHeight = self.scrollView.frame.size.height - imageViewTopMagin - imageViewBottomMagin
-        
+        ///设置pageControl的frame
         let size = self.pageControl.size(forNumberOfPages: (self.imageLinks.count))
         self.pageControl.frame=CGRect(x: 10 + imageViewLeftMagin, y: self.frame.size.height-size.height, width: size.width, height: size.height)
-        
+        ///设置scrollView的子view的frame
         let firstSlideImage = self.scrollView.viewWithTag(kFrontImageTag)
         firstSlideImage?.frame = CGRect(x: imageViewLeftMagin, y: imageViewTopMagin, width: currentimgWidth, height: currentimgHeight)
-        
         for i in 0..<self.imageLinks.count {
             let scrollImg = self.scrollView.viewWithTag(kMiddleImageTag+i)
             scrollImg?.frame=CGRect(x: imgWidth * CGFloat(i+1) + imageViewLeftMagin, y: imageViewTopMagin, width: currentimgWidth, height: currentimgHeight)
         }
-        
         let lastSlideImage = self.scrollView.viewWithTag(kBehindImageTag)
         lastSlideImage?.frame=CGRect(x: CGFloat(imageLinks.count + 1) * imgWidth + imageViewLeftMagin, y: imageViewTopMagin, width: currentimgWidth, height: currentimgHeight)
         
@@ -129,14 +127,14 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
     }
     
     // MARK: - UIScrollViewDelegate
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let pageWidth = scrollView.frame.size.width
         var page = Int(floorf(Float((scrollView.contentOffset.x - pageWidth/CGFloat(imageLinks.count+2)) / pageWidth))) + 1
         page -= 1
         self.pageControl.currentPage = page;
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageWidth = scrollView.frame.size.width
         let pageHeight = scrollView.frame.size.height
         let currentPage = Int(floorf(Float((scrollView.contentOffset.x - pageWidth/CGFloat(imageLinks.count+2)) / pageWidth))) + 1
@@ -148,7 +146,7 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
     }
     
-    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         let pageWidth = scrollView.frame.size.width
         let pageHeight = scrollView.frame.size.height
         if tempPage == 0 {
@@ -158,16 +156,16 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         invalidateTimer()
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         startScroll()
     }
     
     // MARK: - public
-    func startScroll() -> Void {
+    public func startScroll() -> Void {
         if self.autoScroll {
             startTimer()
         }
@@ -197,7 +195,7 @@ class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
             clickClousure((recognizer.view?.tag)!-kMiddleImageTag)
         }
     }
-    
+    ///刷新scrollView子视图
     private func layoutScrollViewSubviews(){
         scrollView.subviews.forEach { $0.removeFromSuperview() }
         for i in 0..<imageLinks.count + 2 {
