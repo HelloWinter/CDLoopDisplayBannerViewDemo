@@ -38,9 +38,21 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
     }
     ///pageControl选中时小点的颜色
-    public var pageCtrlSelectColor : UIColor?
+    public var pageCtrlSelectColor : UIColor?{
+        didSet{
+            if let selectColor = self.pageCtrlSelectColor {
+                pageControl.currentPageIndicatorTintColor = selectColor
+            }
+        }
+    }
     ///pageControl未选中时小点的颜色
-    public var pageCtrlNormalColor : UIColor?
+    public var pageCtrlNormalColor : UIColor?{
+        didSet{
+            if let normalColor = self.pageCtrlNormalColor {
+                pageControl.pageIndicatorTintColor = normalColor
+            }
+        }
+    }
     ///当前的imageView
     public var currentImageView : UIImageView? {
         get {
@@ -67,12 +79,6 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         let pageCtrl = UIPageControl()
         pageCtrl.isHidden = self.pageControlHidden
         pageCtrl.hidesForSinglePage=true
-        if let selectColor = self.pageCtrlSelectColor {
-            pageCtrl.currentPageIndicatorTintColor = selectColor
-        }
-        if let normalColor = self.pageCtrlNormalColor {
-            pageCtrl.pageIndicatorTintColor = normalColor
-        }
         return pageCtrl
     }()
     ///imageView缓存池
