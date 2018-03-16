@@ -62,7 +62,7 @@ open class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
     ///图片距离上下左右的边距
     open var imageViewEdgeInsets = UIEdgeInsets.zero
     ///临时页码
-    private var tempPage = 0
+    fileprivate var tempPage = 0
     ///定时器
     private var timer : Timer?
     ///scrollView
@@ -75,7 +75,7 @@ open class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         return scrollV
     }()
     ///pageControl
-    private lazy var pageControl : UIPageControl = {
+    fileprivate lazy var pageControl : UIPageControl = {
         let pageCtrl = UIPageControl()
         pageCtrl.isHidden = self.pageControlHidden
         pageCtrl.hidesForSinglePage=true
@@ -145,7 +145,7 @@ open class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         RunLoop.current.add(timer!, forMode: .defaultRunLoopMode)
     }
     
-    private func invalidateTimer() -> Void {
+    fileprivate func invalidateTimer() -> Void {
         timer?.invalidate()
         timer=nil
     }

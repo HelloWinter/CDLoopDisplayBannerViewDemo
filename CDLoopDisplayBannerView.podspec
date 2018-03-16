@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CDLoopDisplayBannerView"
-  s.version      = "0.0.3"
+  s.version      = "0.0.6"
   s.summary      = "A CDLoopDisplayBannerView."
 
   # This description is used to generate tags and improve search results.
@@ -56,7 +56,7 @@ Pod::Spec.new do |s|
   s.author             = { "cd" => "cdengong@gmail.com" }
   # Or just: s.author    = "cd"
   # s.authors            = { "cd" => "" }
-  s.social_media_url   = "http://chengdong.online"
+  s.social_media_url   = "http://chengdong.top"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -72,6 +72,9 @@ Pod::Spec.new do |s|
   # s.osx.deployment_target = "10.7"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
+
+
+  s.swift_version = '3.2'
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
