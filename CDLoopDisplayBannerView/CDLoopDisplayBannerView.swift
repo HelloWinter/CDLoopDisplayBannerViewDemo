@@ -13,9 +13,9 @@ private let kFrontImageTag = 300
 private let kMiddleImageTag = 400
 private let kBehindImageTag = 500
 
-public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
+open class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
     ///滚动banner的图片链接数组
-    public var imageLinks : [String] = [String]() {
+    open var imageLinks : [String] = [String]() {
         didSet{
             if self.imageLinks.count != 0 {
                 self.pageControl.numberOfPages = self.imageLinks.count
@@ -26,19 +26,19 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
     }
     ///是否自动滚动
-    public var autoScroll = false
+    open var autoScroll = false
     ///自动滚动的时间间隔
-    public var autoScrollTimeInterval : TimeInterval = 4.0
+    open var autoScrollTimeInterval : TimeInterval = 4.0
     ///图片点击回调
-    public var imageClickClousure : ((_ : Int)->Void)?
+    open var imageClickClousure : ((_ : Int)->Void)?
     ///是否隐藏pageControl
-    public var pageControlHidden = false {
+    open var pageControlHidden = false {
         didSet{
             self.pageControl.isHidden = pageControlHidden
         }
     }
     ///pageControl选中时小点的颜色
-    public var pageCtrlSelectColor : UIColor?{
+    open var pageCtrlSelectColor : UIColor?{
         didSet{
             if let selectColor = self.pageCtrlSelectColor {
                 pageControl.currentPageIndicatorTintColor = selectColor
@@ -46,7 +46,7 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
     }
     ///pageControl未选中时小点的颜色
-    public var pageCtrlNormalColor : UIColor?{
+    open var pageCtrlNormalColor : UIColor?{
         didSet{
             if let normalColor = self.pageCtrlNormalColor {
                 pageControl.pageIndicatorTintColor = normalColor
@@ -54,13 +54,13 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
     }
     ///当前的imageView
-    public var currentImageView : UIImageView? {
+    open var currentImageView : UIImageView? {
         get {
             return self.imgViewsCachePool[self.pageControl.currentPage]
         }
     }
     ///图片距离上下左右的边距
-    public var imageViewEdgeInsets = UIEdgeInsets.zero
+    open var imageViewEdgeInsets = UIEdgeInsets.zero
     ///临时页码
     private var tempPage = 0
     ///定时器
@@ -100,7 +100,7 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         let imageViewTopMagin = self.imageViewEdgeInsets.top
         let imageViewLeftMagin = self.imageViewEdgeInsets.left
@@ -111,7 +111,6 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         
         let imgWidth = self.scrollView.frame.size.width
         let imgHeight = self.scrollView.frame.size.height
-        
         let currentimgWidth = self.scrollView.frame.size.width - imageViewLeftMagin - imageViewRightMagin
         let currentimgHeight = self.scrollView.frame.size.height - imageViewTopMagin - imageViewBottomMagin
         ///设置pageControl的frame
@@ -126,52 +125,14 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
         let lastSlideImage = self.scrollView.viewWithTag(kBehindImageTag)
         lastSlideImage?.frame=CGRect(x: CGFloat(imageLinks.count + 1) * imgWidth + imageViewLeftMagin, y: imageViewTopMagin, width: currentimgWidth, height: currentimgHeight)
-        
+        //设置contentSize
         self.scrollView.contentSize=CGSize(width: imgWidth * CGFloat(imageLinks.count + 2), height: imgHeight)
-        
+        //滚动到默认位置
         self.scrollView.scrollRectToVisible(CGRect(x: imgWidth, y: 0, width: imgWidth, height: imgHeight), animated: false)
     }
     
-    // MARK: - UIScrollViewDelegate
-    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageWidth = scrollView.frame.size.width
-        var page = Int(floorf(Float((scrollView.contentOffset.x - pageWidth/CGFloat(imageLinks.count+2)) / pageWidth))) + 1
-        page -= 1
-        self.pageControl.currentPage = page;
-    }
-    
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let pageWidth = scrollView.frame.size.width
-        let pageHeight = scrollView.frame.size.height
-        let currentPage = Int(floorf(Float((scrollView.contentOffset.x - pageWidth/CGFloat(imageLinks.count+2)) / pageWidth))) + 1
-        
-        if currentPage == 0 {
-            scrollView.scrollRectToVisible(CGRect(x: pageWidth * CGFloat(imageLinks.count), y: 0, width: pageWidth, height: pageHeight), animated: false)
-        }else if currentPage == imageLinks.count + 1 {
-            scrollView.scrollRectToVisible(CGRect(x: pageWidth, y: 0, width: pageWidth, height: pageHeight), animated: false)
-        }
-    }
-    
-    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        let pageWidth = scrollView.frame.size.width
-        let pageHeight = scrollView.frame.size.height
-        if tempPage == 0 {
-            scrollView.scrollRectToVisible(CGRect(x: pageWidth * CGFloat(imageLinks.count), y: 0, width: pageWidth, height: pageHeight), animated: false)
-        }else if tempPage == imageLinks.count {
-            scrollView.scrollRectToVisible(CGRect(x: pageWidth, y: 0, width: pageWidth, height: pageHeight), animated: false)
-        }
-    }
-    
-    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        invalidateTimer()
-    }
-    
-    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        startScroll()
-    }
-    
     // MARK: - public
-    public func startScroll() -> Void {
+    open func startScroll() -> Void {
         if self.autoScroll {
             startTimer()
         }
@@ -240,5 +201,44 @@ public class CDLoopDisplayBannerView: UIView, UIScrollViewDelegate {
         }
         self.setNeedsLayout()
     }
+}
+// MARK: - UIScrollViewDelegate
+extension CDLoopDisplayBannerView{
     
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageWidth = scrollView.frame.size.width
+        var page = Int(floorf(Float((scrollView.contentOffset.x - pageWidth/CGFloat(imageLinks.count+2)) / pageWidth))) + 1
+        page -= 1
+        self.pageControl.currentPage = page;
+    }
+    
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageWidth = scrollView.frame.size.width
+        let pageHeight = scrollView.frame.size.height
+        let currentPage = Int(floorf(Float((scrollView.contentOffset.x - pageWidth/CGFloat(imageLinks.count+2)) / pageWidth))) + 1
+        
+        if currentPage == 0 {
+            scrollView.scrollRectToVisible(CGRect(x: pageWidth * CGFloat(imageLinks.count), y: 0, width: pageWidth, height: pageHeight), animated: false)
+        }else if currentPage == imageLinks.count + 1 {
+            scrollView.scrollRectToVisible(CGRect(x: pageWidth, y: 0, width: pageWidth, height: pageHeight), animated: false)
+        }
+    }
+    
+    public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        let pageWidth = scrollView.frame.size.width
+        let pageHeight = scrollView.frame.size.height
+        if tempPage == 0 {
+            scrollView.scrollRectToVisible(CGRect(x: pageWidth * CGFloat(imageLinks.count), y: 0, width: pageWidth, height: pageHeight), animated: false)
+        }else if tempPage == imageLinks.count {
+            scrollView.scrollRectToVisible(CGRect(x: pageWidth, y: 0, width: pageWidth, height: pageHeight), animated: false)
+        }
+    }
+    
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        invalidateTimer()
+    }
+    
+    public func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        startScroll()
+    }
 }
